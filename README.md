@@ -14,6 +14,36 @@ JDX Plano is a web-based application that uses artificial intelligence to recomm
 - Real-time feedback integration
 - User preference learning
 
+## Project Structure
+
+```
+JDXPlano/
+├── frontend/           # React frontend application
+│   ├── src/           # Source files
+│   ├── public/        # Static files
+│   └── package.json   # Frontend dependencies
+│
+├── backend/           # Node.js backend server
+│   ├── src/          # Source files
+│   ├── config/       # Configuration files
+│   └── package.json  # Backend dependencies
+│
+├── ai-service/        # Python AI service
+│   ├── src/          # Source files
+│   ├── models/       # AI models
+│   └── requirements.txt  # Python dependencies
+│
+├── docs/             # Documentation
+│   ├── requirements.md      # Korean requirements
+│   ├── requirements_en.md   # English requirements
+│   ├── system_design.md     # Korean system design
+│   └── system_design_en.md  # English system design
+│
+└── scripts/          # Utility scripts
+    ├── setup.sh      # Development environment setup
+    └── deploy.sh     # Deployment scripts
+```
+
 ## Technical Stack
 
 ### Frontend
@@ -44,6 +74,8 @@ Detailed documentation can be found in the `docs` directory:
 
 - [Requirements (Korean)](docs/requirements.md)
 - [Requirements (English)](docs/requirements_en.md)
+- [System Design (Korean)](docs/system_design.md)
+- [System Design (English)](docs/system_design_en.md)
 
 ## Getting Started
 
@@ -67,9 +99,15 @@ cd JDXPlano
 
 ```bash
 # Frontend
+cd frontend
 npm install
 
 # Backend
+cd ../backend
+npm install
+
+# AI Service
+cd ../ai-service
 pip install -r requirements.txt
 ```
 
@@ -84,10 +122,16 @@ cp .env.example .env
 
 ```bash
 # Frontend
+cd frontend
 npm run dev
 
 # Backend
+cd ../backend
 npm run server
+
+# AI Service
+cd ../ai-service
+python src/main.py
 ```
 
 ## Contributing
