@@ -104,4 +104,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Project Link: [https://github.com/your-username/jdx-plano](https://github.com/your-username/jdx-plano)
+Project Link: [https://github.com/hwkim3882/JDXPlano](https://github.com/hwkim3882/JDXPlano)
