@@ -59,8 +59,8 @@ Detailed documentation can be found in the `docs` directory:
 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/jdx-plano.git
-cd jdx-plano
+git clone https://github.com/hwkim3882/JDXPlano.git
+cd JDXPlano
 ```
 
 2. Install dependencies
