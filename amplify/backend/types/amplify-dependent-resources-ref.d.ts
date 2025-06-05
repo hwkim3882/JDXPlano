@@ -1,4 +1,22 @@
 export type AmplifyDependentResourcesAttributes = {
+  "api": {
+    "estimateApi": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    }
+  },
+  "auth": {
+    "jdxplano": {
+      "AppClientID": "string",
+      "AppClientIDWeb": "string",
+      "IdentityPoolId": "string",
+      "IdentityPoolName": "string",
+      "UserPoolArn": "string",
+      "UserPoolId": "string",
+      "UserPoolName": "string"
+    }
+  },
   "function": {
     "estimateApi": {
       "Arn": "string",

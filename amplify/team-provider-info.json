@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-jdxplano-dev-f18f4-unauthRole",
       "StackName": "amplify-jdxplano-dev-f18f4",
       "StackId": "arn:aws:cloudformation:us-west-1:151459800831:stack/amplify-jdxplano-dev-f18f4/a7da4ef0-41ba-11f0-a167-028c9a7dd719",
-      "AmplifyAppId": "d2rqs3hkx2d8zy"
+      "AmplifyAppId": "d2rqs3hkx2d8zy",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-jdxplano-dev-f18f4-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "function": {
@@ -21,6 +22,12 @@
       },
       "storage": {
         "DynamoDB": {}
+      },
+      "auth": {
+        "jdxplano": {}
+      },
+      "api": {
+        "estimateApi": {}
       }
     }
   }

@@ -3,15 +3,75 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function FreeEstimatePage() {
-  const [visitDay, setVisitDay] = useState(null);
-  // Optional: Add state management for form inputs here later
-  // const [formData, setFormData] = useState({});
-  // TODO: Add state for "How did you hear about us?" checkboxes
+  const [form, setForm] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
+    address: "",
+    address2: "",
+    city: "",
+    state: "",
+    zip: "",
+    country: "",
+    visitDay: null,
+    visitHours: "",
+    products: [],
+    heardAbout: [],
+    marketingPermission: false,
+  });
 
-  const handleSubmit = (event) => {
+  const handleChange = (e) => {
+    const { id, value, type, checked, name } = e.target;
+    if (type === "checkbox" && name === "products") {
+      setForm((prev) => ({
+        ...prev,
+        products: checked
+          ? [...prev.products, value]
+          : prev.products.filter((v) => v !== value),
+      }));
+    } else if (type === "checkbox" && name === "heardAbout") {
+      setForm((prev) => ({
+        ...prev,
+        heardAbout: checked
+          ? [...prev.heardAbout, value]
+          : prev.heardAbout.filter((v) => v !== value),
+      }));
+    } else if (type === "checkbox" && id === "marketingPermission") {
+      setForm((prev) => ({ ...prev, marketingPermission: checked }));
+    } else {
+      setForm((prev) => ({ ...prev, [id]: value }));
+    }
+  };
+
+  const handleDateChange = (date) => {
+    setForm((prev) => ({ ...prev, visitDay: date }));
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // TODO: Add form submission logic here later
-    console.log("Form submitted");
+    const payload = {
+      ...form,
+      visitDay: form.visitDay ? form.visitDay.toISOString().slice(0, 10) : "",
+    };
+    try {
+      const res = await fetch(
+        "https://om2uwxkitc.execute-api.us-west-1.amazonaws.com/dev/estimate",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+      const data = await res.json();
+      if (data.success) {
+        alert("저장 성공!");
+      } else {
+        alert("저장 실패: " + data.error);
+      }
+    } catch (err) {
+      alert("에러: " + err.message);
+    }
   };
 
   console.log("FreeEstimatePage 렌더링됨");
@@ -59,7 +119,8 @@ function FreeEstimatePage() {
                   id="email"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
                   required
-                  // TODO: Add value and onChange handlers
+                  value={form.email}
+                  onChange={handleChange}
                 />
               </div>
               {/* Name */}
@@ -73,14 +134,16 @@ function FreeEstimatePage() {
                     id="firstName"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
                     placeholder="First Name"
-                    // TODO: Add value and onChange handlers
+                    value={form.firstName}
+                    onChange={handleChange}
                   />
                   <input
                     type="text"
                     id="lastName"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
                     placeholder="Last Name"
-                    // TODO: Add value and onChange handlers
+                    value={form.lastName}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -96,7 +159,8 @@ function FreeEstimatePage() {
                   type="tel"
                   id="phone"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
-                  // TODO: Add value and onChange handlers
+                  value={form.phone}
+                  onChange={handleChange}
                 />
               </div>
               {/* Address */}
@@ -112,14 +176,16 @@ function FreeEstimatePage() {
                   id="address"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200 mb-4"
                   placeholder="Street Address"
-                  // TODO: Add value and onChange handlers
+                  value={form.address}
+                  onChange={handleChange}
                 />
                 <input
                   type="text"
                   id="address2"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
                   placeholder="Address Line 2"
-                  // TODO: Add value and onChange handlers
+                  value={form.address2}
+                  onChange={handleChange}
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -128,14 +194,16 @@ function FreeEstimatePage() {
                   id="city"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
                   placeholder="City"
-                  // TODO: Add value and onChange handlers
+                  value={form.city}
+                  onChange={handleChange}
                 />
                 <input
                   type="text"
                   id="state"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
                   placeholder="State/Prov/Region"
-                  // TODO: Add value and onChange handlers
+                  value={form.state}
+                  onChange={handleChange}
                 />
               </div>
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -144,12 +212,14 @@ function FreeEstimatePage() {
                   id="zip"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
                   placeholder="Postal/Zip"
-                  // TODO: Add value and onChange handlers
+                  value={form.zip}
+                  onChange={handleChange}
                 />
                 <select
                   id="country"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
-                  // TODO: Add value and onChange handlers
+                  value={form.country}
+                  onChange={handleChange}
                 >
                   <option value="">--Select Country--</option>
                   <option value="USA">USA</option>
@@ -165,8 +235,8 @@ function FreeEstimatePage() {
                   Visit Day
                 </label>
                 <DatePicker
-                  selected={visitDay}
-                  onChange={(date) => setVisitDay(date)}
+                  selected={form.visitDay}
+                  onChange={handleDateChange}
                   dateFormat="yyyy-MM-dd"
                   minDate={new Date()}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
@@ -185,7 +255,8 @@ function FreeEstimatePage() {
                 <select
                   id="visitHours"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus::border-transparent transition duration-200"
-                  // TODO: Add value and onChange handlers
+                  value={form.visitHours}
+                  onChange={handleChange}
                 >
                   <option value="">--Select Time--</option>
                   <option value="10AM-12PM">10 AM - 12 PM</option>
@@ -205,7 +276,9 @@ function FreeEstimatePage() {
                       type="checkbox"
                       className="form-checkbox text-blue-600"
                       value="BLINDS"
-                      /* TODO: Add checked/onChange */
+                      name="products"
+                      checked={form.products.includes("BLINDS")}
+                      onChange={handleChange}
                     />
                     <span className="ml-2 text-gray-700">BLINDS</span>
                   </label>
@@ -214,7 +287,9 @@ function FreeEstimatePage() {
                       type="checkbox"
                       className="form-checkbox text-blue-600"
                       value="PATIO SCREEN"
-                      /* TODO: Add checked/onChange */
+                      name="products"
+                      checked={form.products.includes("PATIO SCREEN")}
+                      onChange={handleChange}
                     />
                     <span className="ml-2 text-gray-700">PATIO SCREEN</span>
                   </label>
@@ -223,7 +298,9 @@ function FreeEstimatePage() {
                       type="checkbox"
                       className="form-checkbox text-blue-600"
                       value="CURTAIN"
-                      /* TODO: Add checked/onChange */
+                      name="products"
+                      checked={form.products.includes("CURTAIN")}
+                      onChange={handleChange}
                     />
                     <span className="ml-2 text-gray-700">CURTAIN</span>
                   </label>
@@ -234,7 +311,6 @@ function FreeEstimatePage() {
                 <label className="block text-gray-800 text-sm font-semibold mb-2">
                   How did you hear about us?
                 </label>
-                {/* How did you hear about us? (Checkboxes) */}
                 <div className="mt-2 space-y-2 flex flex-col">
                   {[
                     "Our website",
@@ -249,6 +325,9 @@ function FreeEstimatePage() {
                         type="checkbox"
                         className="form-checkbox text-blue-600"
                         value={label}
+                        name="heardAbout"
+                        checked={form.heardAbout.includes(label)}
+                        onChange={handleChange}
                       />
                       <span className="ml-2 text-gray-700">{label}</span>
                     </label>
@@ -261,14 +340,16 @@ function FreeEstimatePage() {
                   <input
                     type="checkbox"
                     className="form-checkbox text-blue-600"
-                    value="email-marketing" /* TODO: Add checked/onChange */
+                    id="marketingPermission"
+                    checked={form.marketingPermission}
+                    onChange={handleChange}
                   />
                   <span className="ml-2 text-gray-700 text-sm">
                     Please select all the ways you would like to hear from JDX
                     Plano: Email
                   </span>
                 </label>
-                {/* TODO: Add privacy policy link */}\
+                {/* TODO: Add privacy policy link */}
               </div>
               {/* Submit Button */}
               <div>

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/estimate": {
+      "name": "/estimate",
+      "lambdaFunction": "estimateApi",
+      "permissions": {
+        "setting": "protected",
+        "auth": [
+          "create"
+        ],
+        "guest": [
+          "create"
+        ]
+      }
+    }
+  }
+}
