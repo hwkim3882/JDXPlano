@@ -1,7 +1,9 @@
 /* Amplify Params - DO NOT EDIT
 	ENV
 	REGION
-	ESTIMATE_TABLE
+	STORAGE_DYNAMODB_ARN
+	STORAGE_DYNAMODB_NAME
+	STORAGE_DYNAMODB_STREAMARN
 Amplify Params - DO NOT EDIT */
 
 // /**
@@ -23,7 +25,8 @@ const AWS = require("aws-sdk");
 const { v4: uuidv4 } = require("uuid");
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
-const TABLE_NAME = process.env.ESTIMATE_TABLE || "Estimates";
+// const TABLE_NAME = process.env.ESTIMATE_TABLE || "Estimates";
+const TABLE_NAME = "DynamoDB-dev";
 
 exports.handler = async (event) => {
   try {
