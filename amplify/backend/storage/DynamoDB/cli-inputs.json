@@ -1,0 +1,10 @@
+{
+  "resourceName": "DynamoDB",
+  "tableName": "Estimates",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

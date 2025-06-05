@@ -18,7 +18,17 @@
   "function": {
     "estimateApi": {
       "build": true,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "DynamoDB"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
@@ -47,6 +57,12 @@
           "resourceName": "estimateApi"
         }
       ]
+    }
+  },
+  "storage": {
+    "DynamoDB": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

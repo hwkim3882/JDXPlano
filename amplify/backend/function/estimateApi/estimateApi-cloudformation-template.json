@@ -16,6 +16,18 @@
     "s3Key": {
       "Type": "String"
     },
+    "storageDynamoDBName": {
+      "Type": "String",
+      "Default": "storageDynamoDBName"
+    },
+    "storageDynamoDBArn": {
+      "Type": "String",
+      "Default": "storageDynamoDBArn"
+    },
+    "storageDynamoDBStreamArn": {
+      "Type": "String",
+      "Default": "storageDynamoDBStreamArn"
+    },
     "estimateTable": {
       "Type": "String"
     }
@@ -72,6 +84,15 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "STORAGE_DYNAMODB_NAME": {
+              "Ref": "storageDynamoDBName"
+            },
+            "STORAGE_DYNAMODB_ARN": {
+              "Ref": "storageDynamoDBArn"
+            },
+            "STORAGE_DYNAMODB_STREAMARN": {
+              "Ref": "storageDynamoDBStreamArn"
             },
             "ESTIMATE_TABLE": {
               "Ref": "estimateTable"
@@ -166,6 +187,57 @@
                   }
                 ]
               }
+            }
+          ]
+        }
+      }
+    },
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PartiQLInsert",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:PartiQLSelect"
+              ],
+              "Resource": [
+                {
+                  "Ref": "storageDynamoDBArn"
+                },
+                {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      {
+                        "Ref": "storageDynamoDBArn"
+                      },
+                      "index/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }
