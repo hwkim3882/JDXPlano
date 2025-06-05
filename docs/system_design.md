@@ -8,16 +8,15 @@
 [Client Layer]
     Web Browser (React.js + Three.js)
         ↓
-[API Gateway Layer]
-    AWS API Gateway
+[API Layer]
+    AWS Amplify API (GraphQL/REST) 또는 AWS API Gateway
         ↓
 [Application Layer]
-    Backend Services (Node.js + Express.js)
+    AWS Lambda (Node.js)
     AI Services (Python + FastAPI)
         ↓
 [Data Layer]
-    PostgreSQL (메인 DB)
-    Redis (캐시/세션)
+    DynamoDB (메인 DB, NoSQL)
     S3 (이미지/비디오 저장)
 ```
 
@@ -28,12 +27,13 @@
   - React.js 기반 SPA
   - Three.js 기반 3D 렌더링
   - Tailwind CSS 기반 UI/UX
+  - AWS Amplify Hosting
 
 - **백엔드 서비스**
 
-  - Node.js + Express.js (메인 서버)
+  - AWS Lambda (Node.js, 서버리스)
   - Python + FastAPI (AI 서버)
-  - WebSocket 서버 (실시간 통신)
+  - Amplify API (GraphQL/REST)
 
 - **AI 서비스**
   - 이미지 분석 서버
@@ -42,132 +42,65 @@
 
 ## 2. 데이터베이스 설계
 
-### 2.1 PostgreSQL 스키마
+### 2.1 DynamoDB 테이블 설계
 
-#### Users
+#### Estimates (견적 요청)
 
-```sql
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    name VARCHAR(100) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
+| Attribute            | Type    | Description              |
+| -------------------- | ------- | ------------------------ |
+| id (PK)              | String  | UUID, Primary Key        |
+| email                | String  | 사용자 이메일            |
+| first_name           | String  | 이름                     |
+| last_name            | String  | 성                       |
+| phone                | String  | 전화번호                 |
+| address              | String  | 주소                     |
+| address2             | String  | 상세주소                 |
+| city                 | String  | 도시                     |
+| state                | String  | 주/도                    |
+| zip                  | String  | 우편번호                 |
+| country              | String  | 국가                     |
+| visit_day            | String  | 방문 희망일 (YYYY-MM-DD) |
+| visit_hours          | String  | 방문 시간대              |
+| products             | List    | 구매 희망 제품(배열)     |
+| heard_about          | List    | 유입 경로(배열)          |
+| marketing_permission | Boolean | 마케팅 동의 여부         |
+| created_at           | String  | 생성일시(ISO8601)        |
 
-#### Products
+> DynamoDB는 스키마리스이므로, 필요한 속성만 저장 가능하며, 확장에 유리함.
 
-```sql
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    category VARCHAR(50) NOT NULL,
-    description TEXT,
-    price DECIMAL(10,2),
-    image_url VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
+### 2.2 S3 설계
 
-#### Spaces
-
-```sql
-CREATE TABLE spaces (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id),
-    image_url VARCHAR(255),
-    features JSONB,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-#### Recommendations
-
-```sql
-CREATE TABLE recommendations (
-    id SERIAL PRIMARY KEY,
-    space_id INTEGER REFERENCES spaces(id),
-    product_id INTEGER REFERENCES products(id),
-    score DECIMAL(5,2),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-### 2.2 Redis 스키마
-
-#### 세션 저장
-
-```
-session:{session_id} -> {
-    user_id: string,
-    expires_at: timestamp
-}
-```
-
-#### 캐시 저장
-
-```
-recommendation:{space_id} -> {
-    products: array,
-    expires_at: timestamp
-}
-```
+- 이미지/비디오 등 대용량 파일 저장
 
 ## 3. API 설계
 
-### 3.1 인증 API
+### 3.1 견적 요청 API (예시)
 
 ```typescript
-// POST /api/v1/auth/register
-interface RegisterRequest {
+// POST /api/estimates
+interface EstimateRequest {
   email: string;
-  password: string;
-  name: string;
-}
-
-// POST /api/v1/auth/login
-interface LoginRequest {
-  email: string;
-  password: string;
-}
-```
-
-### 3.2 공간 분석 API
-
-```typescript
-// POST /api/v1/spaces/analyze
-interface SpaceAnalysisRequest {
-  image: File;
-  userId: string;
-}
-
-interface SpaceAnalysisResponse {
-  spaceId: string;
-  features: {
-    windows: WindowFeature[];
-    walls: WallFeature[];
-    lighting: LightingFeature[];
-  };
+  firstName: string;
+  lastName: string;
+  phone: string;
+  address: string;
+  address2?: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+  visitDay: string;
+  visitHours: string;
+  products: string[];
+  heardAbout: string[];
+  marketingPermission: boolean;
 }
 ```
 
-### 3.3 추천 API
+- Amplify API (GraphQL/REST) 또는 API Gateway + Lambda로 구현
+- Lambda 함수에서 DynamoDB에 데이터 저장
 
-```typescript
-// POST /api/v1/recommendations
-interface RecommendationRequest {
-  spaceId: string;
-  preferences?: UserPreferences;
-}
-
-interface RecommendationResponse {
-  recommendations: ProductRecommendation[];
-  simulationUrl?: string;
-}
-```
+### 3.2 인증/인가, AI, 추천 등 기존 API는 동일하게 유지
 
 ## 4. AI 시스템 설계
 
@@ -210,9 +143,9 @@ interface RecommendationResponse {
 
 ### 5.1 인증/인가
 
-- JWT 기반 인증
-- Role-based 접근 제어
-- API 키 관리
+- Amplify Auth, Cognito 등으로 인증/인가
+- DynamoDB IAM 정책으로 접근 제어
+- 데이터 암호화, HTTPS 적용
 
 ### 5.2 데이터 보안
 
@@ -224,9 +157,9 @@ interface RecommendationResponse {
 
 ### 6.1 캐싱 전략
 
-- Redis를 이용한 추천 결과 캐싱
-- CDN을 이용한 정적 자원 캐싱
-- 브라우저 캐싱 최적화
+- DynamoDB의 자동 스케일링, 고가용성 활용
+- S3, CloudFront로 정적 자원 캐싱
+- Lambda의 서버리스 확장성 활용
 
 ### 6.2 부하 분산
 
@@ -282,9 +215,9 @@ jobs:
 
 ### 9.1 수평적 확장
 
-- 마이크로서비스 아키텍처
-- 데이터베이스 샤딩
-- 캐시 클러스터링
+- DynamoDB 파티셔닝, 글로벌 테이블 등 확장성 확보
+- Lambda 함수 분리, 마이크로서비스화
+- AI/추천 기능 확장, 모바일/다국어 지원 등
 
 ### 9.2 기능 확장
 

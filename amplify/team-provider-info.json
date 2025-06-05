@@ -1,0 +1,27 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jdxplano-dev-f18f4-authRole",
+      "UnauthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-dev-f18f4-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-dev-f18f4-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-jdxplano-dev-f18f4-deployment",
+      "UnauthRoleName": "amplify-jdxplano-dev-f18f4-unauthRole",
+      "StackName": "amplify-jdxplano-dev-f18f4",
+      "StackId": "arn:aws:cloudformation:us-west-1:151459800831:stack/amplify-jdxplano-dev-f18f4/a7da4ef0-41ba-11f0-a167-028c9a7dd719",
+      "AmplifyAppId": "d2rqs3hkx2d8zy"
+    },
+    "categories": {
+      "function": {
+        "estimateApi": {
+          "estimateTable": "Estimates",
+          "deploymentBucketName": "amplify-jdxplano-dev-f18f4-deployment",
+          "s3Key": "amplify-builds/estimateApi-6873746747426c417641-build.zip"
+        }
+      },
+      "storage": {
+        "DynamoDB": {}
+      }
+    }
+  }
+}

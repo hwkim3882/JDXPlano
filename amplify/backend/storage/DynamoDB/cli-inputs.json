@@ -1,0 +1,10 @@
+{
+  "resourceName": "DynamoDB",
+  "tableName": "DynamoDB",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}
