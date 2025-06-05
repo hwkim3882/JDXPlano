@@ -1,0 +1,10 @@
+{
+  "permissions": {},
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "estimateTable",
+      "environmentVariableName": "ESTIMATE_TABLE"
+    }
+  ]
+}

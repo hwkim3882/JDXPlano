@@ -1,0 +1,42 @@
+{
+  "function": {
+    "estimateApi": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_estimateApi_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "estimateApi"
+        }
+      ]
+    },
+    "AMPLIFY_function_estimateApi_estimateTable": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "estimateApi"
+        }
+      ]
+    },
+    "AMPLIFY_function_estimateApi_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "estimateApi"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "DynamoDB": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    }
+  }
+}
