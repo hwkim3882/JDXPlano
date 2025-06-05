@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
   return (
-    <div className="relative min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+    <div className="relative min-h-screen flex flex-col items-center justify-center">
       {/* Background Image Container */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('/images/hero-background.jpg')`, // TODO: Replace with actual background image URL
+          backgroundImage: `url('https://cdn.pixabay.com/photo/2024/12/10/12/41/generated-9257818_1280.jpg')`,
         }}
       ></div>
 
