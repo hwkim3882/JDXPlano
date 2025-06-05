@@ -1,5 +1,12 @@
 {
-  "permissions": {},
+  "permissions": {
+    "storage": {
+      "DynamoDB": [
+        "create",
+        "read"
+      ]
+    }
+  },
   "lambdaLayers": [],
   "environmentVariableList": [
     {
