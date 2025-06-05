@@ -17,7 +17,7 @@
 - Product detail viewing
 - Recommendation result saving and sharing
 
-### 2.2 Admin Features
+### 2.2 Admin Featuresw
 
 - Product catalog management
 - User management
