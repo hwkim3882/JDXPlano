@@ -1,30 +1,23 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-jdxplano-dev-f18f4-authRole",
-      "UnauthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-dev-f18f4-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-dev-f18f4-authRole",
+      "AuthRoleName": "amplify-jdxplano-dev-37b94-authRole",
+      "UnauthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-dev-37b94-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-dev-37b94-authRole",
       "Region": "us-west-1",
-      "DeploymentBucketName": "amplify-jdxplano-dev-f18f4-deployment",
-      "UnauthRoleName": "amplify-jdxplano-dev-f18f4-unauthRole",
-      "StackName": "amplify-jdxplano-dev-f18f4",
-      "StackId": "arn:aws:cloudformation:us-west-1:151459800831:stack/amplify-jdxplano-dev-f18f4/a7da4ef0-41ba-11f0-a167-028c9a7dd719",
-      "AmplifyAppId": "d2rqs3hkx2d8zy",
-      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-jdxplano-dev-f18f4-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+      "DeploymentBucketName": "amplify-jdxplano-dev-37b94-deployment",
+      "UnauthRoleName": "amplify-jdxplano-dev-37b94-unauthRole",
+      "StackName": "amplify-jdxplano-dev-37b94",
+      "StackId": "arn:aws:cloudformation:us-west-1:151459800831:stack/amplify-jdxplano-dev-37b94/dd78c920-41d7-11f0-adc2-0258a67ab557",
+      "AmplifyAppId": "d3nw4wwaiaxbtb"
     },
     "categories": {
       "function": {
         "estimateApi": {
-          "estimateTable": "Estimates",
-          "deploymentBucketName": "amplify-jdxplano-dev-f18f4-deployment",
-          "s3Key": "amplify-builds/estimateApi-6873746747426c417641-build.zip"
+          "estimateTable": "DynamoDB-dev",
+          "deploymentBucketName": "amplify-jdxplano-dev-37b94-deployment",
+          "s3Key": "amplify-builds/estimateApi-6637665978742b6c614a-build.zip"
         }
-      },
-      "storage": {
-        "DynamoDB": {}
-      },
-      "auth": {
-        "jdxplano": {}
       },
       "api": {
         "estimateApi": {}

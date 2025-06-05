@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function FreeEstimatePage() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     firstName: "",
@@ -56,7 +58,7 @@ function FreeEstimatePage() {
     };
     try {
       const res = await fetch(
-        "https://om2uwxkitc.execute-api.us-west-1.amazonaws.com/dev/estimate",
+        "https://kwy0jqwi63.execute-api.us-west-1.amazonaws.com/dev/estimate",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -66,6 +68,7 @@ function FreeEstimatePage() {
       const data = await res.json();
       if (data.success) {
         alert("저장 성공!");
+        navigate("/");
       } else {
         alert("저장 실패: " + data.error);
       }

@@ -5,13 +5,7 @@
       "name": "/estimate",
       "lambdaFunction": "estimateApi",
       "permissions": {
-        "setting": "protected",
-        "auth": [
-          "create"
-        ],
-        "guest": [
-          "create"
-        ]
+        "setting": "open"
       }
     }
   }
