@@ -25,7 +25,7 @@ function HomePage() {
         </p>
         <Link
           to="/estimate"
-          className="bg-blue-600 text-white text-2xl font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300"
+          className="bg-blue-600 text-white text-2xl font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 w-full max-w-xs mx-auto block text-center break-words whitespace-normal"
         >
           Get Your Free Estimate Now!
         </Link>
