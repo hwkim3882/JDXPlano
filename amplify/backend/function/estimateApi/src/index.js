@@ -34,7 +34,7 @@ exports.handler = async (event) => {
 
     const item = {
       id: uuidv4(),
-      email: data.email,
+      email: data.email || "unknown",
       first_name: data.firstName,
       last_name: data.lastName,
       phone: data.phone,
@@ -49,6 +49,7 @@ exports.handler = async (event) => {
       products: data.products,
       heard_about: data.heardAbout,
       marketing_permission: data.marketingPermission,
+      message: data.message,
       created_at: new Date().toISOString(),
     };
 

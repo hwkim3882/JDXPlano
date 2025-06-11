@@ -1,17 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+import Gallery from './pages/Gallery';
+import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import FreeEstimatePage from './pages/FreeEstimatePage';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/estimate" element={<FreeEstimatePage />} />
+          <Route path="/gallery" element={<Gallery />} />
         </Routes>
-      </div>
+      </Layout>
     </Router>
   );
 }
@@ -23,6 +27,5 @@ function App() {
 //       </div>
 //     );
 //   }
-  
 
-export default App; 
+export default App;
