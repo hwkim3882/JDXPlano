@@ -5,16 +5,8 @@ import GoogleReviewList from '../components/GoogleReviewList';
 const HomePage = () => {
   return (
     <div className="relative min-h-screen">
-      {/* Background Image Container */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url('https://cdn.pixabay.com/photo/2024/12/10/12/41/generated-9257818_1280.jpg')`,
-        }}
-      ></div>
-
       {/* Background Overlay for text readability */}
-      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="absolute inset-0 bg-black opacity-40"></div>
 
       {/* Hero Section */}
       <div className="relative z-10">
