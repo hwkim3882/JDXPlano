@@ -90,7 +90,12 @@ const Gallery = () => {
         })
       );
 
-      setImages((prev) => [...prev, ...newImages]);
+      setImages((prev) => {
+        const all = [...prev, ...newImages];
+        // id 기준으로 중복 제거
+        const unique = Array.from(new Map(all.map((img) => [img.id, img])).values());
+        return unique;
+      });
       setLastLoaded(result.items[result.items.length - 1]?.name || null);
     } catch (error) {
       console.error('Error loading images:', error);
