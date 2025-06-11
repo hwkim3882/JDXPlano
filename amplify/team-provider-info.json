@@ -14,13 +14,20 @@
     "categories": {
       "function": {
         "estimateApi": {
-          "estimateTable": "DynamoDB-dev",
           "deploymentBucketName": "amplify-jdxplano-dev-37b94-deployment",
-          "s3Key": "amplify-builds/estimateApi-6637665978742b6c614a-build.zip"
+          "s3Key": "amplify-builds/estimateApi-2b6b537934776e303676-build.zip",
+          "estimateTable": "DynamoDB-dev"
+        },
+        "googleReviews": {
+          "deploymentBucketName": "amplify-jdxplano-dev-37b94-deployment",
+          "s3Key": "amplify-builds/googleReviews-62304567476576324e6b-build.zip"
         }
       },
       "api": {
         "estimateApi": {}
+      },
+      "storage": {
+        "DynamoDB": {}
       }
     }
   }

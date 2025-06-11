@@ -9,6 +9,14 @@
           ],
           "category": "function",
           "resourceName": "estimateApi"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "googleReviews"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -29,6 +37,11 @@
           "resourceName": "DynamoDB"
         }
       ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "googleReviews": {
+      "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
@@ -55,6 +68,22 @@
         {
           "category": "function",
           "resourceName": "estimateApi"
+        }
+      ]
+    },
+    "AMPLIFY_function_googleReviews_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "googleReviews"
+        }
+      ]
+    },
+    "AMPLIFY_function_googleReviews_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "googleReviews"
         }
       ]
     }

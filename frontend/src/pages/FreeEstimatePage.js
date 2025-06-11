@@ -1,23 +1,25 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+const TABLE_NAME = 'Estimates-dev';
 
 function FreeEstimatePage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
-    address: "",
-    address2: "",
-    city: "",
-    state: "",
-    zip: "",
-    country: "",
+    email: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+    address: '',
+    address2: '',
+    city: '',
+    state: '',
+    zip: '',
+    country: '',
     visitDay: null,
-    visitHours: "",
+    visitHours: '',
     products: [],
     heardAbout: [],
     marketingPermission: false,
@@ -25,21 +27,19 @@ function FreeEstimatePage() {
 
   const handleChange = (e) => {
     const { id, value, type, checked, name } = e.target;
-    if (type === "checkbox" && name === "products") {
+    if (type === 'checkbox' && name === 'products') {
       setForm((prev) => ({
         ...prev,
-        products: checked
-          ? [...prev.products, value]
-          : prev.products.filter((v) => v !== value),
+        products: checked ? [...prev.products, value] : prev.products.filter((v) => v !== value),
       }));
-    } else if (type === "checkbox" && name === "heardAbout") {
+    } else if (type === 'checkbox' && name === 'heardAbout') {
       setForm((prev) => ({
         ...prev,
         heardAbout: checked
           ? [...prev.heardAbout, value]
           : prev.heardAbout.filter((v) => v !== value),
       }));
-    } else if (type === "checkbox" && id === "marketingPermission") {
+    } else if (type === 'checkbox' && id === 'marketingPermission') {
       setForm((prev) => ({ ...prev, marketingPermission: checked }));
     } else {
       setForm((prev) => ({ ...prev, [id]: value }));
@@ -54,30 +54,30 @@ function FreeEstimatePage() {
     event.preventDefault();
     const payload = {
       ...form,
-      visitDay: form.visitDay ? form.visitDay.toISOString().slice(0, 10) : "",
+      visitDay: form.visitDay ? form.visitDay.toISOString().slice(0, 10) : '',
     };
     try {
       const res = await fetch(
-        "https://kwy0jqwi63.execute-api.us-west-1.amazonaws.com/dev/estimate",
+        'https://kwy0jqwi63.execute-api.us-west-1.amazonaws.com/dev/estimate',
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         }
       );
       const data = await res.json();
       if (data.success) {
-        alert("저장 성공!");
-        navigate("/");
+        alert('저장 성공!');
+        navigate('/');
       } else {
-        alert("저장 실패: " + data.error);
+        alert('저장 실패: ' + data.error);
       }
     } catch (err) {
-      alert("에러: " + err.message);
+      alert('에러: ' + err.message);
     }
   };
 
-  console.log("FreeEstimatePage 렌더링됨");
+  console.log('FreeEstimatePage 렌더링됨');
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -89,9 +89,9 @@ function FreeEstimatePage() {
               src="https://mcusercontent.com/744748f5bd75c9102edd7b1c3/images/891ba646-96cc-c4ab-cd48-324f17d16bfc.png"
               alt="JDX Plano Hero"
               style={{
-                maxWidth: "200px",
-                height: "auto",
-                display: "block",
+                maxWidth: '200px',
+                height: 'auto',
+                display: 'block',
               }}
               className="rounded-lg shadow-md"
             />
@@ -104,17 +104,12 @@ function FreeEstimatePage() {
             >
               Get Your Free Estimate
             </h1>
-            <p className="text-gray-700 mb-8 text-center">
-              Please fill out the form below.
-            </p>
+            <p className="text-gray-700 mb-8 text-center">Please fill out the form below.</p>
 
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Email Address */}
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-gray-800 text-sm font-semibold mb-2"
-                >
+                <label htmlFor="email" className="block text-gray-800 text-sm font-semibold mb-2">
                   Email Address <span className="text-red-600">*</span>
                 </label>
                 <input
@@ -128,9 +123,7 @@ function FreeEstimatePage() {
               </div>
               {/* Name */}
               <div>
-                <label className="block text-gray-800 text-sm font-semibold mb-2">
-                  Name
-                </label>
+                <label className="block text-gray-800 text-sm font-semibold mb-2">Name</label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input
                     type="text"
@@ -152,10 +145,7 @@ function FreeEstimatePage() {
               </div>
               {/* Phone Number */}
               <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-gray-800 text-sm font-semibold mb-2"
-                >
+                <label htmlFor="phone" className="block text-gray-800 text-sm font-semibold mb-2">
                   Phone Number
                 </label>
                 <input
@@ -168,10 +158,7 @@ function FreeEstimatePage() {
               </div>
               {/* Address */}
               <div>
-                <label
-                  htmlFor="address"
-                  className="block text-gray-800 text-sm font-semibold mb-2"
-                >
+                <label htmlFor="address" className="block text-gray-800 text-sm font-semibold mb-2">
                   Address
                 </label>
                 <input
@@ -280,7 +267,7 @@ function FreeEstimatePage() {
                       className="form-checkbox text-blue-600"
                       value="BLINDS"
                       name="products"
-                      checked={form.products.includes("BLINDS")}
+                      checked={form.products.includes('BLINDS')}
                       onChange={handleChange}
                     />
                     <span className="ml-2 text-gray-700">BLINDS</span>
@@ -291,7 +278,7 @@ function FreeEstimatePage() {
                       className="form-checkbox text-blue-600"
                       value="PATIO SCREEN"
                       name="products"
-                      checked={form.products.includes("PATIO SCREEN")}
+                      checked={form.products.includes('PATIO SCREEN')}
                       onChange={handleChange}
                     />
                     <span className="ml-2 text-gray-700">PATIO SCREEN</span>
@@ -302,7 +289,7 @@ function FreeEstimatePage() {
                       className="form-checkbox text-blue-600"
                       value="CURTAIN"
                       name="products"
-                      checked={form.products.includes("CURTAIN")}
+                      checked={form.products.includes('CURTAIN')}
                       onChange={handleChange}
                     />
                     <span className="ml-2 text-gray-700">CURTAIN</span>
@@ -315,30 +302,38 @@ function FreeEstimatePage() {
                   How did you hear about us?
                 </label>
                 <div className="mt-2 space-y-2 flex flex-col">
-                  {[
-                    "Our website",
-                    "Google",
-                    "Drive By",
-                    "Social Media",
-                    "Community",
-                    "Other",
-                  ].map((label) => (
-                    <label key={label} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox text-blue-600"
-                        value={label}
-                        name="heardAbout"
-                        checked={form.heardAbout.includes(label)}
-                        onChange={handleChange}
-                      />
-                      <span className="ml-2 text-gray-700">{label}</span>
-                    </label>
-                  ))}
+                  {['Our website', 'Google', 'Drive By', 'Social Media', 'Community', 'Other'].map(
+                    (label) => (
+                      <label key={label} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          className="form-checkbox text-blue-600"
+                          value={label}
+                          name="heardAbout"
+                          checked={form.heardAbout.includes(label)}
+                          onChange={handleChange}
+                        />
+                        <span className="ml-2 text-gray-700">{label}</span>
+                      </label>
+                    )
+                  )}
                 </div>
               </div>
+              {/* Message or comments */}
+              <div>
+                <label className="block text-gray-800 text-sm font-semibold mb-2">
+                  Message or comments (optional)
+                </label>
+                <textarea
+                  id="message"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
+                  placeholder="Message or comments"
+                  value={form.message}
+                  onChange={handleChange}
+                />
+              </div>
               {/* Marketing Permissions (Checkbox) */}
-              <div className="mb-6">
+              {/* <div className="mb-6">
                 <label className="inline-flex items-center">
                   <input
                     type="checkbox"
@@ -353,7 +348,7 @@ function FreeEstimatePage() {
                   </span>
                 </label>
                 {/* TODO: Add privacy policy link */}
-              </div>
+              {/* </div> */}
               {/* Submit Button */}
               <div>
                 <button
