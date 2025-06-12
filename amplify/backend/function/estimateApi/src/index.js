@@ -29,6 +29,25 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const TABLE_NAME = "Estimates-dev";
 
 exports.handler = async (event) => {
+  if (event.httpMethod === "GET") {
+    // 전체 신청 내역 조회
+    try {
+      const data = await dynamoDb.scan({ TableName: TABLE_NAME }).promise();
+      return {
+        statusCode: 200,
+        body: JSON.stringify(data.Items),
+        headers: { "Access-Control-Allow-Origin": "*" },
+      };
+    } catch (err) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ success: false, error: err.message }),
+        headers: { "Access-Control-Allow-Origin": "*" },
+      };
+    }
+  }
+
+  // 기존 POST 저장 로직
   try {
     const data = JSON.parse(event.body);
 
