@@ -5,6 +5,12 @@ import Gallery from './pages/Gallery';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import FreeEstimatePage from './pages/FreeEstimatePage';
+import BlindsPage from './pages/BlindsPage';
+import GalleryCategoryPage from './pages/GalleryCategoryPage';
+import WhyJDX from './pages/WhyJDX';
+import AdminPage from './pages/AdminPage';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
   return (
@@ -14,6 +20,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/estimate" element={<FreeEstimatePage />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/gallery/:category" element={<GalleryCategoryPage />} />
+          <Route path="/blinds" element={<BlindsPage />} />
+          <Route path="/whyjdx" element={<WhyJDX />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </Layout>
     </Router>
