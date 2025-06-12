@@ -74,7 +74,7 @@ export default function GoogleReviewList() {
         ))}
       </div>
       <a
-        href="https://search.google.com/local/writereview?placeid=ChIJ5cDjSvMnTIYRUyksVzTGHRQ"
+        href="https://search.google.com/local/writereview?placeid=ChIJVXj7tKgZTIYR1EGoOtyONLU"
         target="_blank"
         rel="noopener noreferrer"
         className="block bg-cyan-400 hover:bg-cyan-500 text-white font-bold py-3 px-8 rounded-full text-lg shadow transition mb-6"

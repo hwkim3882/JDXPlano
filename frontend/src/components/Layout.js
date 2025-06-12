@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import GoogleReviewList from '../components/GoogleReviewList';
 
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -15,8 +14,8 @@ const Layout = ({ children }) => {
     { path: '/', label: 'Home' },
     { path: '/estimate', label: 'Free Estimate' },
     { path: '/gallery', label: 'Gallery' },
-    { path: '/ai-recommendation', label: 'AI Recommendation' },
-    { path: '/why-jdx', label: 'Why JDX' },
+    //{ path: '/ai-recommendation', label: 'AI Recommendation' },
+    { path: '/whyjdx', label: 'Why JDX' },
   ];
 
   return (
@@ -110,8 +109,8 @@ const Layout = ({ children }) => {
             <div className="font-semibold">JDX Plano H-mart</div>
             <div>
               Phone:{' '}
-              <a href="tel:123-456-7890" className="hover:underline">
-                123-456-7890
+              <a href="tel:945-249-4851" className="hover:underline">
+                945-249-4851
               </a>
             </div>
             <div>
