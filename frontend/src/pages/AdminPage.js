@@ -19,7 +19,9 @@ export default function AdminPage() {
         const res = await fetch(
           'https://kwy0jqwi63.execute-api.us-west-1.amazonaws.com/dev/estimate'
         );
-        const data = await res.json();
+        let data = await res.json();
+        // created_at 기준 내림차순 정렬
+        data = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         setEstimates(data);
       } catch (err) {
         setError('데이터를 불러오지 못했습니다.');
