@@ -15,12 +15,11 @@ const HomePage = () => {
             <main className="mt-2 mx-auto max-w-7xl px-4 sm:mt-4 sm:px-6 md:mt-6 lg:mt-8 lg:px-8 xl:mt-10">
               <div className="sm:text-center lg:text-left pl-8 md:pl-12 lg:pl-16">
                 <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
-                  <span className="block">Transform Your Space</span>
-                  <span className="block text-yellow-600">With JDX Plano</span>
+                  <span className="block">Style Your Windows with Custom Blinds</span>
+                  <span className="block text-yellow-600">by JDX Plano</span>
                 </h1>
                 <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  Experience the perfect blend of style and functionality with our expert remodeling
-                  services. From kitchens to bathrooms, we bring your vision to life.
+                Refined elegance meets tailored functionality in every detail. At <span className="text-amber-500 font-semibold">JDX Plano</span>, we offer <strong>premium blinds and curtains</strong> meticulously crafted to enhance the beauty, comfort, and character of your home.
                 </p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
