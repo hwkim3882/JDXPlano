@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const TABLE_NAME = 'Estimates-dev';
+// const TABLE_NAME = 'Estimates-dev';
 
 function FreeEstimatePage() {
   const navigate = useNavigate();
@@ -24,6 +26,18 @@ function FreeEstimatePage() {
     heardAbout: [],
     marketingPermission: false,
   });
+
+  const requiredFields = [
+    { id: 'email', label: 'Email Address' },
+    { id: 'firstName', label: 'First Name' },
+    { id: 'lastName', label: 'Last Name' },
+    { id: 'phone', label: 'Phone Number' },
+    { id: 'address', label: 'Address' },
+    { id: 'city', label: 'City' },
+    { id: 'state', label: 'State' },
+    { id: 'zip', label: 'Postal/Zip' },
+    { id: 'visitDay', label: 'Visit Day' },
+  ];
 
   const handleChange = (e) => {
     const { id, value, type, checked, name } = e.target;
@@ -52,6 +66,15 @@ function FreeEstimatePage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // 필수 입력값 체크
+    for (const field of requiredFields) {
+      if (!form[field.id] || (field.id === 'visitDay' && !form.visitDay)) {
+        alert(`${field.label} is required.`);
+        const el = document.getElementById(field.id);
+        if (el) el.focus();
+        return;
+      }
+    }
     const payload = {
       ...form,
       visitDay: form.visitDay ? form.visitDay.toISOString().slice(0, 10) : '',
@@ -67,10 +90,12 @@ function FreeEstimatePage() {
       );
       const data = await res.json();
       if (data.success) {
-        alert('저장 성공!');
-        navigate('/');
+        toast.success('Thank you for your request! We will get back to you soon.');
+        setTimeout(() => {
+          navigate('/');
+        }, 1600);
       } else {
-        alert('저장 실패: ' + data.error);
+        toast.error('Sorry, your request could not be processed. Please try again later.');
       }
     } catch (err) {
       alert('에러: ' + err.message);
@@ -82,7 +107,7 @@ function FreeEstimatePage() {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="max-w-2xl mx-auto my-8 sm:my-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto my-2 sm:my-4 px-4 sm:px-6 lg:px-8">
           {/* Add hero image at the top */}
           <div className="mb-4 flex justify-center">
             <img
@@ -123,7 +148,7 @@ function FreeEstimatePage() {
               </div>
               {/* Name */}
               <div>
-                <label className="block text-gray-800 text-sm font-semibold mb-2">Name</label>
+                <label className="block text-gray-800 text-sm font-semibold mb-2">Name <span className="text-red-600">*</span></label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input
                     type="text"
@@ -146,7 +171,7 @@ function FreeEstimatePage() {
               {/* Phone Number */}
               <div>
                 <label htmlFor="phone" className="block text-gray-800 text-sm font-semibold mb-2">
-                  Phone Number
+                  Phone Number <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="tel"
@@ -159,7 +184,7 @@ function FreeEstimatePage() {
               {/* Address */}
               <div>
                 <label htmlFor="address" className="block text-gray-800 text-sm font-semibold mb-2">
-                  Address
+                  Address <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
@@ -210,6 +235,7 @@ function FreeEstimatePage() {
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
                   value={form.country}
                   onChange={handleChange}
+                  required
                 >
                   <option value="">--Select Country--</option>
                   <option value="USA">USA</option>
@@ -222,16 +248,18 @@ function FreeEstimatePage() {
                   htmlFor="visitDay"
                   className="block text-gray-800 text-sm font-semibold mb-2"
                 >
-                  Visit Day
+                  Visit Day <span className="text-red-600">*</span>
                 </label>
                 <DatePicker
                   selected={form.visitDay}
                   onChange={handleDateChange}
                   dateFormat="yyyy-MM-dd"
-                  minDate={new Date()}
+                  minDate={(() => { const d = new Date(); d.setDate(d.getDate() + 1); return d; })()}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
                   placeholderText="Select a date"
                   id="visitDay"
+                  required
+                  filterDate={date => date.getDay() !== 0}
                 />
               </div>
               {/* Visiting Hours (Dropdown) */}
@@ -240,7 +268,7 @@ function FreeEstimatePage() {
                   htmlFor="visitHours"
                   className="block text-gray-800 text-sm font-semibold mb-2"
                 >
-                  Visiting Hours
+                  Visiting Hours 
                 </label>
                 <select
                   id="visitHours"
@@ -260,7 +288,30 @@ function FreeEstimatePage() {
                 <label className="block text-gray-800 text-sm font-semibold mb-2">
                   Purchasing Products
                 </label>
+                
                 <div className="mt-2 space-y-2 flex flex-col">
+                <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="form-checkbox text-blue-600"
+                      value="SHADE(COMBI,ROLLER)"
+                      name="products"
+                      checked={form.products.includes('SHADE(COMBI,ROLLER)')}
+                      onChange={handleChange}
+                    />
+                    <span className="ml-2 text-gray-700">SHADE(COMBI, ROLLER, MOTORIZED)</span>
+                  </label>
+                <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="form-checkbox text-blue-600"
+                      value="SHUTTER"
+                      name="products"
+                      checked={form.products.includes('SHUTTER')}
+                      onChange={handleChange}
+                    />
+                    <span className="ml-2 text-gray-700">SHUTTER</span>
+                  </label>
                   <label className="flex items-center">
                     <input
                       type="checkbox"
@@ -272,6 +323,7 @@ function FreeEstimatePage() {
                     />
                     <span className="ml-2 text-gray-700">BLINDS</span>
                   </label>
+                  
                   <label className="flex items-center">
                     <input
                       type="checkbox"
@@ -362,6 +414,7 @@ function FreeEstimatePage() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

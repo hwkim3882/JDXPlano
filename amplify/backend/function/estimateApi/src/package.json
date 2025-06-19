@@ -8,6 +8,9 @@
     "@types/aws-lambda": "^8.10.92"
   },
   "dependencies": {
-    "aws-sdk": "^2.1692.0"
+    "aws-sdk": "^2.1692.0",
+    "moment-timezone": "^0.6.0",
+    "nodemailer": "^7.0.3",
+    "twilio": "^5.7.1"
   }
 }
