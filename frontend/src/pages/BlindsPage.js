@@ -2,14 +2,15 @@ import React from 'react';
 
 const blinds = [
   { name: 'COMBI BLINDS', img: 'combi.jpg' },
-  { name: 'TWIN SHADES', img: 'twin.jpg' },
-  { name: 'TRIPLE SHADES', img: 'triple.jpg' },
-  { name: 'BLACKOUT BLINDS', img: 'blackout.jpg' },
+  // { name: 'TWIN SHADES', img: 'twin.jpg' },
+  // { name: 'TRIPLE SHADES', img: 'triple.jpg' },
+  // { name: 'BLACKOUT BLINDS', img: 'blackout.jpg' },
   { name: 'ROLL BLINDS', img: 'roll.jpg' },
   { name: 'SOLAR SCREEN', img: 'solar.jpg' },
-  { name: 'LASER BLINDS', img: 'laser.jpg' },
-  { name: 'ART BLINDS', img: 'art.jpg' },
+  { name: '2" BLINDS & CORDLESS/ SMART CURTAIN', img: 'laser.jpg' },
+  // { name: 'ART BLINDS', img: 'art.jpg' },
   { name: 'PATIO SCREEN', img: 'roman.jpg' },
+  { name: 'SHUTTER', img: 'shutter.jpg' },
 ];
 
 export default function BlindsPage() {

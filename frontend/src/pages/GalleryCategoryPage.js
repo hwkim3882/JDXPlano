@@ -27,9 +27,10 @@ const categoryNames = {
   shutter: 'SHUTTER',
   roll: 'ROLL BLINDS',
   solar: 'SOLAR SCREEN',
-  laser: 'LASER BLINDS',
+  // laser: 'LASER BLINDS',
   art: 'ART BLINDS',
   patio: 'PATIO SCREEN',
+  smartcurtain: '2" BLINDS & CORDLESS/ SMART CURTAIN',
 };
 
 function Arrow({ className, style, onClick, direction }) {
@@ -194,7 +195,7 @@ export default function GalleryCategoryPage() {
           </p>
           <p className="text-sm text-gray-500">or click to select files</p>
         </div>
-      </div> */}
+      </div>  */}
 
       {images.length > 0 ? (
         <>
@@ -234,7 +235,7 @@ export default function GalleryCategoryPage() {
         </>
       ) : (
         <div className="w-full max-w-3xl h-[300px] flex items-center justify-center bg-gray-100 text-gray-500 text-lg">
-          이미지가 없습니다.
+          images are loading...
         </div>
       )}
 

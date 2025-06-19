@@ -10,7 +10,7 @@ const Gallery = () => {
     { name: 'SOLAR SCREEN', img: 'Sunscreen.jpg', key: 'solar' },
     // { name: 'TWIN SHADES', img: 'Twin-Shade.jpg', key: 'twin' },
     // { name: 'TRIPLE SHADES', img: 'Triple-Shade.jpg', key: 'triple' },
-    { name: 'LASER BLINDS', img: 'Laser-Blinds.jpg', key: 'laser' },
+    { name: '2" BLINDS & CORDLESS / SMART CURTAIN', img: 'smart-curtain.jpg', key: 'smartcurtain' },
     // { name: 'ART BLINDS', img: 'Art-Blinds.jpg', key: 'art' },
   ];
 
@@ -19,7 +19,7 @@ const Gallery = () => {
       className="bg-gray-100 flex flex-col items-center w-full"
       style={{ paddingTop: '50px', paddingBottom: '50px' }}
     >
-      <h1 className="text-3xl font-bold mb-8">Gallery</h1>
+      <h1 className="text-4xl font-bold mb-8">Gallery</h1>
       <div className="flex justify-center mb-8">
         <button
           className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded transition text-lg shadow"
