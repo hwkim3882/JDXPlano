@@ -111,7 +111,21 @@ exports.handler = async (event) => {
       from: EMAIL_USER,
       to: EMAIL_USER,
       subject: "📬 New Estimate Request Received",
-      text: `New estimate submitted by ${item.first_name} ${item.last_name}\nPhone: ${item.phone}\nMessage: ${item.message}\nvisit_day: ${item.visit_day}\nvisit_hours: ${item.visit_hours}`,
+      text: `New estimate submitted by:
+Name: ${item.first_name} ${item.last_name}
+Phone: ${item.phone}
+Address: ${item.address} ${item.address2} ${item.city} ${item.state} ${
+        item.zip
+      } ${item.country}
+Email: ${item.email}
+Visit Day: ${item.visit_day}
+Visit Hours: ${item.visit_hours}
+Products: ${
+        Array.isArray(item.products)
+          ? item.products.join(", ")
+          : "None selected"
+      }
+Message: ${item.message || "No message"}`,
     });
 
     // 3. 문자 발송 (AWS SNS)

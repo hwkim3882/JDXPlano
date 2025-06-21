@@ -15,7 +15,7 @@
       "function": {
         "estimateApi": {
           "deploymentBucketName": "amplify-jdxplano-dev-37b94-deployment",
-          "s3Key": "amplify-builds/estimateApi-32517a5174414b2f5075-build.zip",
+          "s3Key": "amplify-builds/estimateApi-7339644e462f30344477-build.zip",
           "estimateTable": "DynamoDB-dev"
         },
         "googleReviews": {

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { CalendarIcon, ClockIcon } from '@heroicons/react/24/outline';
 
 // const TABLE_NAME = 'Estimates-dev';
 
@@ -26,6 +27,14 @@ function FreeEstimatePage() {
     heardAbout: [],
     marketingPermission: false,
   });
+
+  const productOptions = [
+    { value: 'Blinds', label: 'Blinds' },
+    { value: 'Shades', label: 'Shades' },
+    { value: 'Curtains', label: 'Curtains' },
+    { value: 'Shutters', label: 'Shutters' },
+  ];
+  const allProductValues = productOptions.map((p) => p.value);
 
   const requiredFields = [
     { id: 'email', label: 'Email Address' },
@@ -62,6 +71,14 @@ function FreeEstimatePage() {
 
   const handleDateChange = (date) => {
     setForm((prev) => ({ ...prev, visitDay: date }));
+  };
+
+  const handleSelectAllProducts = (e) => {
+    const { checked } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      products: checked ? allProductValues : [],
+    }));
   };
 
   const handleSubmit = async (event) => {
@@ -148,7 +165,9 @@ function FreeEstimatePage() {
               </div>
               {/* Name */}
               <div>
-                <label className="block text-gray-800 text-sm font-semibold mb-2">Name <span className="text-red-600">*</span></label>
+                <label className="block text-gray-800 text-sm font-semibold mb-2">
+                  Name <span className="text-red-600">*</span>
+                </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input
                     type="text"
@@ -248,19 +267,28 @@ function FreeEstimatePage() {
                   htmlFor="visitDay"
                   className="block text-gray-800 text-sm font-semibold mb-2"
                 >
-                  Visit Day <span className="text-red-600">*</span>
+                  Preferred Visit Date <span className="text-red-600">*</span>
                 </label>
-                <DatePicker
-                  selected={form.visitDay}
-                  onChange={handleDateChange}
-                  dateFormat="yyyy-MM-dd"
-                  minDate={(() => { const d = new Date(); d.setDate(d.getDate() + 1); return d; })()}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
-                  placeholderText="Select a date"
-                  id="visitDay"
-                  required
-                  filterDate={date => date.getDay() !== 0}
-                />
+                <div className="relative mt-1">
+                  <DatePicker
+                    selected={form.visitDay}
+                    onChange={handleDateChange}
+                    dateFormat="MM/dd/yyyy"
+                    minDate={(() => {
+                      const d = new Date();
+                      d.setDate(d.getDate() + 1);
+                      return d;
+                    })()}
+                    className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
+                    placeholderText="e.g., 05/15/2024"
+                    id="visitDay"
+                    required
+                    filterDate={(date) => date.getDay() !== 0}
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <CalendarIcon className="h-5 w-5 text-gray-400" />
+                  </div>
+                </div>
               </div>
               {/* Visiting Hours (Dropdown) */}
               <div>
@@ -268,109 +296,58 @@ function FreeEstimatePage() {
                   htmlFor="visitHours"
                   className="block text-gray-800 text-sm font-semibold mb-2"
                 >
-                  Visiting Hours 
+                  Preferred Visit Time
                 </label>
-                <select
-                  id="visitHours"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus::border-transparent transition duration-200"
-                  value={form.visitHours}
-                  onChange={handleChange}
-                >
-                  <option value="">--Select Time--</option>
-                  <option value="10AM-12PM">10 AM - 12 PM</option>
-                  <option value="12PM-2PM">12 PM - 2 PM</option>
-                  <option value="2PM-4PM">2 PM - 4 PM</option>
-                  <option value="4PM-6PM">4 PM - 6 PM</option>
-                </select>
+                <div className="relative mt-1">
+                  <input
+                    type="text"
+                    id="visitHours"
+                    className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
+                    placeholder="e.g., 10:00 AM"
+                    value={form.visitHours}
+                    onChange={handleChange}
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <ClockIcon className="h-5 w-5 text-gray-400" />
+                  </div>
+                </div>
+                <p className="mt-2 text-sm text-gray-500">
+                  We will contact you to confirm the appointment based on your availability.
+                </p>
               </div>
               {/* Purchasing Products (Checkboxes) */}
               <div>
                 <label className="block text-gray-800 text-sm font-semibold mb-2">
                   Purchasing Products
                 </label>
-                
                 <div className="mt-2 space-y-2 flex flex-col">
-                <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      className="form-checkbox text-blue-600"
-                      value="SHADE(COMBI,ROLLER)"
-                      name="products"
-                      checked={form.products.includes('SHADE(COMBI,ROLLER)')}
-                      onChange={handleChange}
-                    />
-                    <span className="ml-2 text-gray-700">SHADE(COMBI, ROLLER, MOTORIZED)</span>
-                  </label>
-                <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      className="form-checkbox text-blue-600"
-                      value="SHUTTER"
-                      name="products"
-                      checked={form.products.includes('SHUTTER')}
-                      onChange={handleChange}
-                    />
-                    <span className="ml-2 text-gray-700">SHUTTER</span>
-                  </label>
                   <label className="flex items-center">
                     <input
                       type="checkbox"
                       className="form-checkbox text-blue-600"
-                      value="BLINDS"
-                      name="products"
-                      checked={form.products.includes('BLINDS')}
-                      onChange={handleChange}
+                      onChange={handleSelectAllProducts}
+                      checked={form.products.length === allProductValues.length}
                     />
-                    <span className="ml-2 text-gray-700">BLINDS</span>
+                    <span className="ml-2 text-gray-700 font-semibold">Select all that apply</span>
                   </label>
-                  
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      className="form-checkbox text-blue-600"
-                      value="PATIO SCREEN"
-                      name="products"
-                      checked={form.products.includes('PATIO SCREEN')}
-                      onChange={handleChange}
-                    />
-                    <span className="ml-2 text-gray-700">PATIO SCREEN</span>
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      className="form-checkbox text-blue-600"
-                      value="CURTAIN"
-                      name="products"
-                      checked={form.products.includes('CURTAIN')}
-                      onChange={handleChange}
-                    />
-                    <span className="ml-2 text-gray-700">CURTAIN</span>
-                  </label>
-                </div>
-              </div>
-              {/* How did you hear about us? (Checkboxes) */}
-              <div>
-                <label className="block text-gray-800 text-sm font-semibold mb-2">
-                  How did you hear about us?
-                </label>
-                <div className="mt-2 space-y-2 flex flex-col">
-                  {['Our website', 'Google', 'Drive By', 'Social Media', 'Community', 'Other'].map(
-                    (label) => (
-                      <label key={label} className="flex items-center">
+                  <div className="pl-6 mt-2 space-y-2 flex flex-col border-l-2 border-gray-200">
+                    {productOptions.map(({ value, label }) => (
+                      <label className="flex items-center" key={value}>
                         <input
                           type="checkbox"
                           className="form-checkbox text-blue-600"
-                          value={label}
-                          name="heardAbout"
-                          checked={form.heardAbout.includes(label)}
+                          value={value}
+                          name="products"
+                          checked={form.products.includes(value)}
                           onChange={handleChange}
                         />
                         <span className="ml-2 text-gray-700">{label}</span>
                       </label>
-                    )
-                  )}
+                    ))}
+                  </div>
                 </div>
               </div>
+
               {/* Message or comments */}
               <div>
                 <label className="block text-gray-800 text-sm font-semibold mb-2">
@@ -384,24 +361,7 @@ function FreeEstimatePage() {
                   onChange={handleChange}
                 />
               </div>
-              {/* Marketing Permissions (Checkbox) */}
-              {/* <div className="mb-6">
-                <label className="inline-flex items-center">
-                  <input
-                    type="checkbox"
-                    className="form-checkbox text-blue-600"
-                    id="marketingPermission"
-                    checked={form.marketingPermission}
-                    onChange={handleChange}
-                  />
-                  <span className="ml-2 text-gray-700 text-sm">
-                    Please select all the ways you would like to hear from JDX
-                    Plano: Email
-                  </span>
-                </label>
-                {/* TODO: Add privacy policy link */}
-              {/* </div> */}
-              {/* Submit Button */}
+
               <div>
                 <button
                   type="submit"
