@@ -29,10 +29,11 @@ function FreeEstimatePage() {
   });
 
   const productOptions = [
-    { value: 'Blinds', label: 'Blinds' },
-    { value: 'Shades', label: 'Shades' },
-    { value: 'Curtains', label: 'Curtains' },
+    { value: 'Shades', label: 'Shades(COMBO, ROLLER, MOTORIZED)' },
     { value: 'Shutters', label: 'Shutters' },
+    { value: 'Blinds', label: 'Blinds' },
+    { value: 'Patio Screen', label: 'Patio Screen' },
+    { value: 'Curtains', label: 'Curtains' },
   ];
   const allProductValues = productOptions.map((p) => p.value);
 
@@ -129,24 +130,29 @@ function FreeEstimatePage() {
           <div className="mb-4 flex justify-center">
             <img
               src="https://mcusercontent.com/744748f5bd75c9102edd7b1c3/images/891ba646-96cc-c4ab-cd48-324f17d16bfc.png"
-              alt="JDX Plano Hero"
+              alt="JDX Blinds and Curtains"
               style={{
                 maxWidth: '200px',
                 height: 'auto',
                 display: 'block',
               }}
-              className="rounded-lg shadow-md"
+              className="rounded-lg"
             />
           </div>
 
           <div className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl">
-            <h1
-              className="text-3xl sm:text-4xl font-black text-gray-900 mb-4 text-center tracking-tight"
-              style={{ fontWeight: 900 }}
-            >
+            <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4 text-center tracking-tight font-serif">
               Get Your Free Estimate
             </h1>
-            <p className="text-gray-700 mb-8 text-center">Please fill out the form below.</p>
+            <p className="text-gray-700 mb-4 text-center">Please fill out the form below.</p>
+            <p className="text-red-800 italic text-center mb-8 px-4 font-serif">
+              Enjoy a complimentary in-home consultation.{' '}
+            </p>
+
+            <p className="text-gray-600 text-center mb-8 px-4 font-serif">
+              Our design expert will visit your home, take precise measurements, and provide a
+              personalized quote—with no pressure or obligation.
+            </p>
 
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Email Address */}
@@ -315,10 +321,10 @@ function FreeEstimatePage() {
                   We will contact you to confirm the appointment based on your availability.
                 </p>
               </div>
-              {/* Purchasing Products (Checkboxes) */}
+              {/* Products of Interest (Checkboxes) */}
               <div>
                 <label className="block text-gray-800 text-sm font-semibold mb-2">
-                  Purchasing Products
+                  Products of Interest
                 </label>
                 <div className="mt-2 space-y-2 flex flex-col">
                   <label className="flex items-center">
