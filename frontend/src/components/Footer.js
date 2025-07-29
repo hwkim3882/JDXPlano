@@ -31,7 +31,7 @@ function Footer() {
             </div>
             <div className="flex items-center pt-2">
               <a
-                href="https://instagram.com/jdxplano"
+                href="https://www.instagram.com/jdxblinds_plano/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-pink-500 hover:text-pink-600 transition"
