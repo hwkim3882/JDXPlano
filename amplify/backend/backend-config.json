@@ -24,6 +24,11 @@
     }
   },
   "function": {
+    "aiConsultationFunc": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "estimateApi": {
       "build": true,
       "dependsOn": [
@@ -47,6 +52,38 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_aiConsultationFunc_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "aiConsultationFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_aiConsultationFunc_openaiApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "aiConsultationFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_aiConsultationFunc_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "aiConsultationFunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_aiConsultationFunc_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "aiConsultationFunc"
+        }
+      ]
+    },
     "AMPLIFY_function_estimateApi_deploymentBucketName": {
       "usedBy": [
         {

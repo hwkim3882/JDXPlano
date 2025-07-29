@@ -16,19 +16,10 @@
     "s3Key": {
       "Type": "String"
     },
-    "storageDynamoDBName": {
-      "Type": "String",
-      "Default": "storageDynamoDBName"
+    "secretsPathAmplifyAppId": {
+      "Type": "String"
     },
-    "storageDynamoDBArn": {
-      "Type": "String",
-      "Default": "storageDynamoDBArn"
-    },
-    "storageDynamoDBStreamArn": {
-      "Type": "String",
-      "Default": "storageDynamoDBStreamArn"
-    },
-    "estimateTable": {
+    "openaiApiKey": {
       "Type": "String"
     }
   },
@@ -62,12 +53,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "estimateApi",
+            "aiConsultationFunc",
             {
               "Fn::Join": [
                 "",
                 [
-                  "estimateApi",
+                  "aiConsultationFunc",
                   "-",
                   {
                     "Ref": "env"
@@ -85,20 +76,31 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "STORAGE_DYNAMODB_NAME": {
-              "Ref": "storageDynamoDBName"
+            "openai": {
+              "Fn::Join": [
+                "",
+                [
+                  {
+                    "Fn::Sub": [
+                      "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                      {
+                        "appId": {
+                          "Ref": "secretsPathAmplifyAppId"
+                        },
+                        "env": {
+                          "Ref": "env"
+                        },
+                        "functionName": "aiConsultationFunc"
+                      }
+                    ]
+                  },
+                  "openai"
+                ]
+              ]
             },
-            "STORAGE_DYNAMODB_ARN": {
-              "Ref": "storageDynamoDBArn"
-            },
-            "STORAGE_DYNAMODB_STREAMARN": {
-              "Ref": "storageDynamoDBStreamArn"
-            },
-            "ESTIMATE_TABLE": {
-              "Ref": "estimateTable"
-            },
-            "SES_FROM_EMAIL": "noreply@yourdomain.com",
-            "SES_TO_EMAIL": "admin@yourdomain.com"
+            "OPENAI_API_KEY": {
+              "Ref": "openaiApiKey"
+            }
           }
         },
         "Role": {
@@ -118,12 +120,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "jdxplanoLambdaRole18ac7c98",
+            "jdxplanoLambdaRole5d5fd66a",
             {
               "Fn::Join": [
                 "",
                 [
-                  "jdxplanoLambdaRole18ac7c98",
+                  "jdxplanoLambdaRole5d5fd66a",
                   "-",
                   {
                     "Ref": "env"
@@ -139,16 +141,29 @@
             {
               "Effect": "Allow",
               "Principal": {
-                "Service": [
-                  "lambda.amazonaws.com"
-                ]
+                "Service": "lambda.amazonaws.com"
               },
-              "Action": [
-                "sts:AssumeRole"
-              ]
+              "Action": "sts:AssumeRole"
             }
           ]
-        }
+        },
+        "Policies": [
+          {
+            "PolicyName": "bedrock-invoke-policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "bedrock:InvokeModel"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     "lambdaexecutionpolicy": {
@@ -194,13 +209,10 @@
         }
       }
     },
-    "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
+    "AmplifyFunctionSecretsPolicy": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy",
+        "PolicyName": "amplify-function-secrets-policy",
         "Roles": [
           {
             "Ref": "LambdaExecutionRole"
@@ -212,46 +224,47 @@
             {
               "Effect": "Allow",
               "Action": [
-                "dynamodb:Put*",
-                "dynamodb:Create*",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PartiQLInsert",
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query",
-                "dynamodb:PartiQLSelect"
+                "ssm:GetParameter",
+                "ssm:GetParameters"
               ],
-              "Resource": [
-                {
-                  "Ref": "storageDynamoDBArn"
-                },
-                {
-                  "Fn::Join": [
-                    "/",
-                    [
-                      {
-                        "Ref": "storageDynamoDBArn"
-                      },
-                      "index/*"
-                    ]
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":parameter",
+                    {
+                      "Fn::Sub": [
+                        "/amplify/${appId}/${env}/AMPLIFY_${functionName}_",
+                        {
+                          "appId": {
+                            "Ref": "secretsPathAmplifyAppId"
+                          },
+                          "env": {
+                            "Ref": "env"
+                          },
+                          "functionName": "aiConsultationFunc"
+                        }
+                      ]
+                    },
+                    "*"
                   ]
-                }
-              ]
-            },
-            {
-              "Effect": "Allow",
-              "Action": [
-                "ses:SendEmail",
-                "ses:SendRawEmail"
-              ],
-              "Resource": "*"
+                ]
+              }
             }
           ]
         }
-      }
+      },
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ]
     }
   },
   "Outputs": {
