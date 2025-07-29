@@ -60,14 +60,6 @@
         }
       ]
     },
-    "AMPLIFY_function_aiConsultationFunc_openaiApiKey": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "aiConsultationFunc"
-        }
-      ]
-    },
     "AMPLIFY_function_aiConsultationFunc_s3Key": {
       "usedBy": [
         {
