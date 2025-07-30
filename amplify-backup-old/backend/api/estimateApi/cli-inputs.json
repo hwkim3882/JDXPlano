@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/estimate": {
+      "name": "/estimate",
+      "lambdaFunction": "estimateApi",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/reviews": {
+      "name": "/reviews",
+      "lambdaFunction": "googleReviews",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

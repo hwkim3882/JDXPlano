@@ -27,7 +27,47 @@
           "s3Key": "amplify-builds/aiConsultationFunc-66446e3676524a70776f-build.zip",
           "secretsPathAmplifyAppId": "d4kyge600zhlo",
           "openaiApiKey": ""
-        }
+        },
+        "DynamoDB": {}
+      },
+      "api": {
+        "estimateApi": {}
+      },
+      "storage": {
+        "DynamoDB": {}
+      }
+    }
+  },
+  "main": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jdxplano-main-ec636-authRole",
+      "UnauthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-main-ec636-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-main-ec636-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-jdxplano-main-ec636-deployment",
+      "UnauthRoleName": "amplify-jdxplano-main-ec636-unauthRole",
+      "StackName": "amplify-jdxplano-main-ec636",
+      "StackId": "arn:aws:cloudformation:us-west-1:151459800831:stack/amplify-jdxplano-main-ec636/fdc71840-6cfb-11f0-b14a-06842101eb55",
+      "AmplifyAppId": "d4kyge600zhlo"
+    },
+    "categories": {
+      "function": {
+        "aiConsultationFunc": {
+          "deploymentBucketName": "amplify-jdxplano-main-ec636-deployment",
+          "s3Key": "amplify-builds/aiConsultationFunc-732b632b3237396d6b35-build.zip",
+          "secretsPathAmplifyAppId": "d4kyge600zhlo",
+          "openaiApiKey": "dummy-key"
+        },
+        "estimateApi": {
+          "deploymentBucketName": "amplify-jdxplano-main-ec636-deployment",
+          "s3Key": "amplify-builds/estimateApi-427259484b6359664a73-build.zip",
+          "estimateTable": "DynamoDB-dev"
+        },
+        "googleReviews": {
+          "deploymentBucketName": "amplify-jdxplano-main-ec636-deployment",
+          "s3Key": "amplify-builds/googleReviews-62304567476576324e6b-build.zip"
+        },
+        "DynamoDB": {}
       },
       "api": {
         "estimateApi": {}
