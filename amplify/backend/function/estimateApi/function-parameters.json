@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "storage": {
+      "DynamoDB": [
+        "create",
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "estimateTable",
+      "environmentVariableName": "ESTIMATE_TABLE"
+    }
+  ]
+}
