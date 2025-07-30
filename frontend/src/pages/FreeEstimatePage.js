@@ -99,7 +99,7 @@ function FreeEstimatePage() {
     };
     try {
       const res = await fetch(
-        'https://kwy0jqwi63.execute-api.us-west-1.amazonaws.com/dev/estimate',
+        'https://qrns9viws0.execute-api.us-west-1.amazonaws.com/dev/estimate',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
