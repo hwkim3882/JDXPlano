@@ -17,7 +17,7 @@ export default function AdminPage() {
       setError('');
       try {
         const res = await fetch(
-          'https://kwy0jqwi63.execute-api.us-west-1.amazonaws.com/dev/estimate'
+          'https://qrns9viws0.execute-api.us-west-1.amazonaws.com/dev/estimate'
         );
         let data = await res.json();
         // created_at 기준 내림차순 정렬
@@ -86,7 +86,9 @@ export default function AdminPage() {
                   <td className="border px-3 py-2">{e.visit_day}</td>
                   <td className="border px-3 py-2">{e.visit_hours}</td>
                   <td className="border px-3 py-2">{e.created_at}</td>
-                  <td className="border px-3 py-2">{Array.isArray(e.products) ? e.products.join(', ') : ''}</td>
+                  <td className="border px-3 py-2">
+                    {Array.isArray(e.products) ? e.products.join(', ') : ''}
+                  </td>
                   <td className="border px-3 py-2">{e.message}</td>
                 </tr>
               ))}

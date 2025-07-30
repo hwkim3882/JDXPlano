@@ -94,11 +94,11 @@
             "STORAGE_DYNAMODB_STREAMARN": {
               "Ref": "storageDynamoDBStreamArn"
             },
+            "SES_FROM_EMAIL": "noreply@yourdomain.com",
+            "SES_TO_EMAIL": "admin@yourdomain.com",
             "ESTIMATE_TABLE": {
               "Ref": "estimateTable"
-            },
-            "SES_FROM_EMAIL": "noreply@yourdomain.com",
-            "SES_TO_EMAIL": "admin@yourdomain.com"
+            }
           }
         },
         "Role": {

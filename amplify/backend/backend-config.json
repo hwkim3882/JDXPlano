@@ -8,7 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "estimateApi"
+          "resourceName": "googleReviews"
         },
         {
           "attributes": [
@@ -16,7 +16,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "googleReviews"
+          "resourceName": "estimateApi"
         }
       ],
       "providerPlugin": "awscloudformation",

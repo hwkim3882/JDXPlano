@@ -5,7 +5,7 @@ export default function GoogleReviewList() {
   const [imgError, setImgError] = useState({});
 
   useEffect(() => {
-    fetch('https://kwy0jqwi63.execute-api.us-west-1.amazonaws.com/dev/reviews')
+    fetch('https://qrns9viws0.execute-api.us-west-1.amazonaws.com/dev/reviews')
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

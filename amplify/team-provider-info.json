@@ -20,9 +20,9 @@
           "s3Key": "amplify-builds/aiConsultationFunc-732b632b3237396d6b35-build.zip"
         },
         "estimateApi": {
-          "estimateTable": "dummy",
           "deploymentBucketName": "amplify-jdxplano-dev-d9007-deployment",
-          "s3Key": "amplify-builds/estimateApi-427259484b6359664a73-build.zip"
+          "s3Key": "amplify-builds/estimateApi-34725a47687838315563-build.zip",
+          "estimateTable": "dummy"
         },
         "googleReviews": {
           "deploymentBucketName": "amplify-jdxplano-dev-d9007-deployment",

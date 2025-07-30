@@ -40,12 +40,12 @@ const EMAIL_PASS = process.env.EMAIL_PASS;
 const RECEIVER_PHONE = process.env.RECEIVER_PHONE; // e.g. +1XXXYYYZZZZ
 
 // Twilio 문자 발송 (임시 테스트용)
-const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;
-const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
-const twilioFrom = process.env.TWILIO_PHONE_NUMBER;
-const customerPhone = process.env.CUSTOMER_PHONE_NUMBER;
+// const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;
+// const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
+// const twilioFrom = process.env.TWILIO_PHONE_NUMBER;
+// const customerPhone = process.env.CUSTOMER_PHONE_NUMBER;
 
-const twilioClient = require("twilio")(twilioAccountSid, twilioAuthToken);
+// const twilioClient = require("twilio")(twilioAccountSid, twilioAuthToken);
 
 exports.handler = async (event) => {
   if (event.httpMethod === "GET") {
@@ -68,7 +68,7 @@ exports.handler = async (event) => {
 
   // 기존 POST 저장 로직
   try {
-    const data = JSON.parse(event.body);
+    const data = JSON.parse(event.body || "{}");
 
     const item = {
       id: uuidv4(),
@@ -127,6 +127,8 @@ Products: ${
       }
 Message: ${item.message || "No message"}`,
     });
+
+    console.log("✅ Estimate saved to DynamoDB:", item.id);
 
     // 3. 문자 발송 (AWS SNS)
     // await sns
