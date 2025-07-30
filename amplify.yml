@@ -3,10 +3,11 @@ frontend:
   phases:
     preBuild:
       commands:
+        - amplify pull --appId d37v05ow4op993 --envName main --yes
         - cd frontend
         - nvm use 20
         - npm ci
-        - amplify pull --appId d37v05ow4op993 --envName main --yes
+
     build:
       commands:
         - npm run build
