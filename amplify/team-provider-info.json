@@ -1,39 +1,15 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-jdxplano-dev-37b94-authRole",
-      "UnauthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-dev-37b94-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-dev-37b94-authRole",
+      "AuthRoleName": "amplify-jdxplano-dev-74cb1-authRole",
+      "UnauthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-dev-74cb1-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::151459800831:role/amplify-jdxplano-dev-74cb1-authRole",
       "Region": "us-west-1",
-      "DeploymentBucketName": "amplify-jdxplano-dev-37b94-deployment",
-      "UnauthRoleName": "amplify-jdxplano-dev-37b94-unauthRole",
-      "StackName": "amplify-jdxplano-dev-37b94",
-      "StackId": "arn:aws:cloudformation:us-west-1:151459800831:stack/amplify-jdxplano-dev-37b94/dd78c920-41d7-11f0-adc2-0258a67ab557",
-      "AmplifyAppId": "d3nw4wwaiaxbtb"
-    },
-    "categories": {
-      "function": {
-        "estimateApi": {
-          "deploymentBucketName": "amplify-jdxplano-dev-37b94-deployment",
-          "s3Key": "amplify-builds/estimateApi-427259484b6359664a73-build.zip",
-          "estimateTable": "DynamoDB-dev"
-        },
-        "googleReviews": {
-          "deploymentBucketName": "amplify-jdxplano-dev-37b94-deployment",
-          "s3Key": "amplify-builds/googleReviews-62304567476576324e6b-build.zip"
-        },
-        "aiConsultationFunc": {
-          "deploymentBucketName": "amplify-jdxplano-dev-37b94-deployment",
-          "s3Key": "amplify-builds/aiConsultationFunc-66446e3676524a70776f-build.zip",
-          "secretsPathAmplifyAppId": "d3nw4wwaiaxbtb"
-        }
-      },
-      "api": {
-        "estimateApi": {}
-      },
-      "storage": {
-        "DynamoDB": {}
-      }
+      "DeploymentBucketName": "amplify-jdxplano-dev-74cb1-deployment",
+      "UnauthRoleName": "amplify-jdxplano-dev-74cb1-unauthRole",
+      "StackName": "amplify-jdxplano-dev-74cb1",
+      "StackId": "arn:aws:cloudformation:us-west-1:151459800831:stack/amplify-jdxplano-dev-74cb1/2d209c50-6cf3-11f0-8562-0201178fd55f",
+      "AmplifyAppId": "d4kyge600zhlo"
     }
   }
 }
