@@ -131,12 +131,22 @@ Message: ${item.message || "No message"}`,
     console.log("✅ Estimate saved to DynamoDB:", item.id);
 
     // 3. 문자 발송 (AWS SNS)
-    // await sns
-    //   .publish({
-    //     Message: `New estimate from ${item.first_name} ${item.last_name}\nPhone: ${item.phone}\nMessage: ${item.message}\nvisit_day: ${item.visit_day}\nvisit_hours: ${item.visit_hours}`,
-    //     PhoneNumber: RECEIVER_PHONE, // +1XXXYYYZZZZ
-    //   })
-    //   .promise();
+    if (RECEIVER_PHONE) {
+      try {
+        await sns
+          .publish({
+            Message: `📬 New Estimate Request\nName: ${item.first_name} ${item.last_name}\nPhone: ${item.phone}\nVisit: ${item.visit_day} ${item.visit_hours}\nAddress: ${item.city}, ${item.state}`,
+            PhoneNumber: RECEIVER_PHONE,
+          })
+          .promise();
+        console.log("✅ SMS sent successfully to:", RECEIVER_PHONE);
+      } catch (smsErr) {
+        console.error("❌ SMS failed:", smsErr.message);
+        // SMS 실패해도 전체 요청은 성공으로 처리
+      }
+    } else {
+      console.warn("⚠️ RECEIVER_PHONE not configured, skipping SMS");
+    }
 
     // // 테스트 문자 발송
     // try {

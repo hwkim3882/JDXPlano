@@ -305,14 +305,18 @@ function FreeEstimatePage() {
                   Preferred Visit Time
                 </label>
                 <div className="relative mt-1">
-                  <input
-                    type="text"
+                  <select
                     id="visitHours"
                     className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition duration-200"
-                    placeholder="e.g., 10:00 AM"
                     value={form.visitHours}
                     onChange={handleChange}
-                  />
+                  >
+                    <option value="">--Select Time--</option>
+                    <option value="10:00 AM">10:00 AM</option>
+                    <option value="12:00 PM">12:00 PM</option>
+                    <option value="2:00 PM">2:00 PM</option>
+                    <option value="4:00 PM">4:00 PM</option>
+                  </select>
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <ClockIcon className="h-5 w-5 text-gray-400" />
                   </div>
