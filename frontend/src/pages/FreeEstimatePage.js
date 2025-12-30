@@ -29,7 +29,7 @@ function FreeEstimatePage() {
   });
 
   const productOptions = [
-    { value: 'Shades', label: 'Shades(COMBO, ROLLER, MOTORIZED)' },
+    { value: 'Shades', label: 'Shades(ZEBRA, ROLLER, MOTORIZED)' },
     { value: 'Shutters', label: 'Shutters' },
     { value: 'Blinds', label: 'Blinds' },
     { value: 'Patio Screen', label: 'Patio Screen' },
@@ -71,7 +71,15 @@ function FreeEstimatePage() {
   };
 
   const handleDateChange = (date) => {
-    setForm((prev) => ({ ...prev, visitDay: date }));
+    // 토요일 선택 시 오후 시간이 선택되어 있으면 초기화
+    const isSaturday = date?.getDay() === 6;
+    const isAfternoon = ['12:00 PM', '2:00 PM', '4:00 PM'].includes(form.visitHours);
+
+    setForm((prev) => ({
+      ...prev,
+      visitDay: date,
+      visitHours: isSaturday && isAfternoon ? '' : prev.visitHours,
+    }));
   };
 
   const handleSelectAllProducts = (e) => {
@@ -312,10 +320,14 @@ function FreeEstimatePage() {
                     onChange={handleChange}
                   >
                     <option value="">--Select Time--</option>
-                    <option value="10:00 AM">10:00 AM</option>
-                    <option value="12:00 PM">12:00 PM</option>
-                    <option value="2:00 PM">2:00 PM</option>
-                    <option value="4:00 PM">4:00 PM</option>
+                    <option value="10:00 AM">10:00 AM - 12:00 PM</option>
+                    {form.visitDay?.getDay() !== 6 && (
+                      <>
+                        <option value="12:00 PM">12:00 PM - 2:00 PM</option>
+                        <option value="2:00 PM">2:00 PM - 4:00 PM</option>
+                        <option value="4:00 PM">4:00 PM - 6:00 PM</option>
+                      </>
+                    )}
                   </select>
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <ClockIcon className="h-5 w-5 text-gray-400" />
