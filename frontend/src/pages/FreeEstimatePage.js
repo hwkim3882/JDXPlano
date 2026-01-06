@@ -26,6 +26,7 @@ function FreeEstimatePage() {
     products: [],
     heardAbout: [],
     marketingPermission: false,
+    smsOptIn: false,
   });
 
   const productOptions = [
@@ -382,6 +383,21 @@ function FreeEstimatePage() {
                   value={form.message}
                   onChange={handleChange}
                 />
+              </div>
+
+              <div className="mb-4">
+                <label className="flex items-start">
+                  <input
+                    type="checkbox"
+                    id="smsOptIn"
+                    className="form-checkbox text-blue-600 mt-1"
+                    checked={form.smsOptIn}
+                    onChange={(e) => setForm((prev) => ({ ...prev, smsOptIn: e.target.checked }))}
+                  />
+                  <span className="ml-2 text-sm text-gray-700">
+                    I agree to receive transactional SMS messages from JDX Plano related to my inquiry or service request. Message frequency varies. Message & data rates may apply. Reply STOP to opt out, HELP for help.
+                  </span>
+                </label>
               </div>
 
               <div className="text-center text-sm text-gray-600 mb-4">
