@@ -9,6 +9,8 @@ import BlindsPage from './pages/BlindsPage';
 import GalleryCategoryPage from './pages/GalleryCategoryPage';
 import WhyJDX from './pages/WhyJDX';
 import AdminPage from './pages/AdminPage';
+import TermsPage from './pages/TermsPage';
+import PrivacyPage from './pages/PrivacyPage';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -24,6 +26,8 @@ function App() {
           <Route path="/blinds" element={<BlindsPage />} />
           <Route path="/whyjdx" element={<WhyJDX />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
         </Routes>
       </Layout>
     </Router>

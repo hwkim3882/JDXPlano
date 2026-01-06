@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -382,6 +382,18 @@ function FreeEstimatePage() {
                   value={form.message}
                   onChange={handleChange}
                 />
+              </div>
+
+              <div className="text-center text-sm text-gray-600 mb-4">
+                By submitting this form, you agree to our{' '}
+                <Link to="/terms" className="text-blue-600 hover:underline">
+                  Terms & Conditions
+                </Link>{' '}
+                and{' '}
+                <Link to="/privacy" className="text-blue-600 hover:underline">
+                  Privacy Policy
+                </Link>
+                .
               </div>
 
               <div>
