@@ -14,13 +14,28 @@ const HomePage = () => {
           <div className="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
             <main className="mt-2 mx-auto max-w-7xl px-4 sm:mt-4 sm:px-6 md:mt-6 lg:mt-8 lg:px-8 xl:mt-10">
               <div className="sm:text-center lg:text-left pl-8 md:pl-12 lg:pl-16">
-                <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
-                  <span className="block">Style Your Windows with Custom Blinds</span>
-                  <span className="block text-yellow-600">by JDX Plano</span>
-                </h1>
-                <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                Refined elegance meets tailored functionality in every detail. At <span className="text-amber-500 font-semibold">JDX Plano</span>, we offer <strong>premium blinds and curtains</strong> meticulously crafted to enhance the beauty, comfort, and character of your home.
+                <h2 className="text-2xl tracking-tight font-extrabold text-white sm:text-3xl md:text-4xl">
+                  <span className="block">Bare Windows?  Broken Blinds?  Outdated Curtains?</span>
+                </h2>
+
+                {/* Subheading */}
+                <p className="mt-4 text-lg sm:text-xl md:text-2xl text-gray-200 font-medium">
+                  Whatever the problem, JDX has the fix — custom window treatments, professionally installed across North Texas since 2015
                 </p>
+
+                {/* Phone Number - Prominently Displayed */}
+                <div className="mt-6 mb-4">
+                  <a
+                    href="tel:945-249-4851"
+                    className="inline-flex items-center text-3xl sm:text-4xl md:text-5xl font-black text-yellow-300 hover:text-yellow-200 transition-all duration-200 drop-shadow-[0_0_15px_rgba(253,224,71,0.7)]"
+                    style={{ textShadow: '0 0 20px rgba(253, 224, 71, 0.8)' }}
+                  >
+                    <svg className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 mr-3 drop-shadow-[0_0_10px_rgba(253,224,71,0.6)]" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                    </svg>
+                    945-249-4851
+                  </a>
+                </div>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
                     <Link
@@ -37,6 +52,22 @@ const HomePage = () => {
                     >
                       View Our Work
                     </Link>
+                  </div>
+                </div>
+
+                {/* Animated Features */}
+                <div className="mt-8 h-10 relative overflow-hidden">
+                  <div className="slide-feature-item absolute flex items-center text-white text-lg sm:text-xl md:text-2xl font-semibold whitespace-nowrap uppercase">
+                    <span className="text-yellow-400 mr-2 text-2xl">✓</span>
+                    Lifetime A/S support
+                  </div>
+                  <div className="slide-feature-item absolute flex items-center text-white text-lg sm:text-xl md:text-2xl font-semibold whitespace-nowrap uppercase">
+                    <span className="text-yellow-400 mr-2 text-2xl">✓</span>
+                    100% free installation
+                  </div>
+                  <div className="slide-feature-item absolute flex items-center text-white text-lg sm:text-xl md:text-2xl font-semibold whitespace-nowrap uppercase">
+                    <span className="text-yellow-400 mr-2 text-2xl">✓</span>
+                    Fast in-home consultation
                   </div>
                 </div>
               </div>

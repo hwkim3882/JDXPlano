@@ -150,7 +150,7 @@ function FreeEstimatePage() {
           </div>
 
           <div className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl">
-            <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4 text-center tracking-tight font-serif">
+            <h1 className="text-4xl sm:text-5xl font-black text-blue-700 mb-4 text-center tracking-tight font-serif">
               Get Your Free Estimate
             </h1>
             <p className="text-gray-700 mb-4 text-center">Please fill out the form below.</p>
@@ -204,7 +204,7 @@ function FreeEstimatePage() {
               </div>
               {/* Phone Number */}
               <div>
-                <label htmlFor="phone" className="block text-gray-800 text-sm font-semibold mb-2">
+                <label htmlFor="phone" className="block text-gray-900 text-xl font-bold mb-2">
                   Phone Number <span className="text-red-600">*</span>
                 </label>
                 <input
