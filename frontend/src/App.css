@@ -61,6 +61,7 @@
 
 .slide-feature-item {
   animation: slideRightToLeft 12s ease-in-out infinite;
+  opacity: 0;
 }
 
 .slide-feature-item:nth-child(1) {
